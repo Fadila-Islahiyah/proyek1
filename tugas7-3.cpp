@@ -5,13 +5,43 @@ using namespace std;
 string n[max], nik[max], kab[max], TTL[max], imunisasi[max], polio[max], campak[max], influenza[max], hepatitis_A[max], PCV[max],dengue[max], loop;
 int pos=0;
 
+
+void display(){
+	system("cls");
+	if(pos>0){
+		cout<<"Data Tersimpan"<<endl;
+		for(int a=0; a<pos; a++){
+			cout<<a+1<<". Data Vaksin "<<endl;
+			cout<<"  Nama : "<< n[a]<<endl;
+			cout<<"  NIK : "<< nik[a]<<endl;
+			cout<<"  kab : "<< kab[a]<<endl;
+			cout<<"  Tempat, tanggal lahir : "<< TTL[a]<<endl;
+			cout<<"       "<<endl;
+			cout<<"usia 0-6 bulan "<<endl;
+			cout<<"  Imunisasi : "<< imunisasi[a] <<endl;
+			cout<<"  Polio : " << polio[a]<<endl;
+			cout<<"usia 6-12 bulan "<<endl;
+			cout<<"  Campak : "<< campak[a] <<endl;
+			cout<<"  Influenza : " << influenza[a]<<endl;
+			cout<<"usia 12-24 bulan"<<endl;
+			cout<<"  Hepatitis A : "<< hepatitis_A[a] <<endl;
+			cout<<"  PCV : " << PCV[a]<<endl;
+			cout<<"usia 2-18 tahun "<<endl;
+			cout<<"  Campak : "<< campak[a] <<endl; 
+			cout<<"  Dengue : " << dengue[a]<<endl;
+		}
+	}else{
+		cout<<"Data Kosong"<<endl;
+	}
+}
 void add(){
+	display(); 
 	do{
 		if(pos<max){
 			cin.ignore();
 			cout<<"Nama : ";
 			getline(cin, n[pos]);
-			cout<<"nik : ";
+			cout<<"NIK : ";
 			getline(cin, nik[pos]);
 			cout<<"kab : ";
 			getline(cin, kab[pos]);
@@ -38,6 +68,7 @@ void add(){
 			cout<<"  Dengue : ";
 			getline(cin, dengue[pos]);
 			pos++;
+			display();
 			cout<<"ulangi (y/t) : ";
 			cin>>loop;
 		}else{
@@ -48,6 +79,43 @@ void add(){
 	
 	}while(loop=="y");
 	cout<<"Tambahkan Data"<<endl;
+}
+void edit(){
+	int y;
+	do{
+		display();
+		cout << "Edit Data ke : ";
+		cin>>y;
+		cin.ignore();	
+		cout<<"Edit data : ";
+		getline(cin, n[y-1]);
+		cout<<"Edit menjadi : ";
+		display();	
+		cout << "ubah lagi (y/t) : ";
+		cin >> loop;
+	} while (loop == "y");
+}
+
+void del(){
+	int x;
+	do{
+		display();
+		if(pos>0){
+			cout<<"hapus data ke : ";
+			cin>>x;
+			for(int i=x; i<pos; i++){
+				n[i-1]=n[1];
+			}
+			pos--;
+			display();
+			cout<<"hapus lagi(y/t) : ";
+			cin>>loop;
+		}else {
+			cout<<"isi t : ";
+			cin>>loop;
+		}
+		
+	}while(loop=="y");
 }
 
 int main(){
@@ -67,13 +135,16 @@ int main(){
 			break;
 		case 2:
 			do{
+			display();
 			cout<<"kembali (y) : ";
 			cin>>loop;
 		}while(loop !="y");
 			break;
 		case 3:
+			edit();
 			break;
 		case 4:
+			del();
 			break;
 		case 5:
 			cout<<"....."<<endl;
